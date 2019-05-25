@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bartenetaor</title>
+    <style>
+        body {
+            color: #fffb00;
+            text-shadow: 1px 1px 1px black;
+        }
+
+        @font-face {
+            font-family: Simpsons;
+            src: url(/fonts/simpsonfont-webfont.woff);
+        }
+
+        #page-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: calc(100vh - 60px);
+            width: calc(100vw - 60px);
+            background-color: #6ab0e2;
+            margin: 30px;
+            border: 1px solid black;
+        }
+
+        .col {
+            display: flex;
+            flex-flow: column nowrap;
+            width: 90%;
+        }
+
+        .row {
+            display: flex;
+            flex-flow: row nowrap;
+            margin-bottom: 10px;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .start {
+            align-items: start;
+        }
+
+        #title {
+            font-family: Simpsons;
+            color: #fed522;
+            text-shadow: 8px 8px 10px #6b6b69;
+            font-size: 73px;
+        }
+
+        label {
+            width: 200px;
+            margin-right: 10px;
+            text-align: right;
+            font-size: 26px;
+            color: #fffb00;
+
+        }
+
+        #text-to-speak {
+            height: 60px;
+            flex: 1 1 auto;
+            font-size: 20px;
+        }
+
+        #select-voice {
+            flex: 1 1 auto;
+            font-size: 24px;
+        }
+
+        .full {
+            flex: 1 1 auto;
+        }
+
+        .stretch {
+            align-self: stretch;
+        }
+
+        .full-height {
+            height: 100%;
+        }
+
+        .scroll {
+            overflow: scroll;
+        }
+
+        .self-center {
+            align-self: center;
+        }
+
+        button {
+            height: 40px;
+            line-height: 36px;
+            font-size: 24px;
+        }
+
+        #text-from-file {
+            flex: 1 1 auto;
+            height: 250px;
+            background-color: rgba(255, 255, 255, 0.5);
+            overflow: scroll;
+            display: flex;
+            flex-flow: column nowrap;
+            font-size: 24px;
+            line-height: 24px;
+            transition: color 1s, font-size 0.3s, line-height 0.3s;
+            color: yellow;
+        }
+
+        #stop-from-server {
+            width: 200px;
+            margin-right: 10px;
+        }
+
+        select {
+            width: 200px;
+        }
+
+        .big-bold {
+            color: red;
+            font-size: 28px;
+            line-height: 26px;
+            transition: color 1s, font-size 0.3s, line-height 0.3s;
+        }
+    </style>
+</head>
+<body>
+<div id="page-container" class="col">
+    <div class="row start full-height">
+        <img src="/images/bart.png" width="300px" height="600px">
+        <div class="container col full full-height">
+            <h2 id="title" class="self-center">Bartenetor</h2>
+            <div class="col scroll">
+                <div class="row full">
+                    <label id="select-voice-label">Select a voice: </label>
+                    <select id="select-voice"></select>
+                </div>
+                <div class="row">
+                    <label>Random</label>
+                    <form class="full" id="set-random">
+                        <span>On</span>
+                        <input type="radio" id="random-on" name="random" value="true" />
+                        <span>Off</span>
+                        <input type="radio" id="random-off" name="random" value="false" checked />
+                    </form>
+                </div>
+                <div class="row">
+                    <label id="text-to-speak-label">Say: </label>
+                    <textarea id="text-to-speak"></textarea>
+                </div>
+                <div class="row">
+                    <label></label>
+                    <button id="say-text" class="full">Click to say</button>
+                </div>
+                <div class="row">
+                    <button id="stop-from-server">Stop</button>
+                    <button id="say-from-file" class="full">Play from server</button>
+                </div>
+                <div class="row full">
+                    <label id="text-from-file-label">From server:</label>
+                    <div id="text-from-file"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+  const synth = window.speechSynthesis;
+
+  const inputTxt = document.querySelector('#text-to-speak');
+  const voiceSelect = document.querySelector('select');
+  const sayButton = document.querySelector('#say-text');
+  const textFromFile = document.querySelector('#text-from-file');
+  const buttonSayFromFile = document.querySelector('#say-from-file');
+  const buttonStopFromFile = document.querySelector('#stop-from-server');
+  const randomForm = document.querySelector('#set-random');
+
+  let voices = [];
+  let linesToSpeak;
+  let utterThis = null;
+  let linesQue = [];
+  let queNum = 0;
+  let isRandomVoice = false;
+
+  function populateVoiceList() {
+    voices = synth.getVoices();
+
+    for (let i = 0; i < voices.length; i++) {
+      var option = document.createElement('option');
+      option.textContent = voices[i].name + ' (' + voices[i].lang + ')';
+
+      if (voices[i].default) {
+        option.textContent += ' -- DEFAULT';
+      }
+
+      option.setAttribute('data-lang', voices[i].lang);
+      option.setAttribute('data-name', voices[i].name);
+      voiceSelect.appendChild(option);
+    }
+  }
+
+  window.addEventListener('load', () => {
+    setTimeout(populateVoiceList, 500);
+  });
+
+  function utter(txt) {
+    return new Promise((resolve) => {
+      if (isRandomVoice) {
+        voiceSelect.selectedIndex = Math.floor(Math.random() * voiceSelect.options.length);
+      }
+
+      if (utterThis instanceof SpeechSynthesisUtterance) {
+        synth.cancel();
+      }
+      utterThis = new SpeechSynthesisUtterance(txt);
+      const selectedOption = voiceSelect.selectedOptions[0].getAttribute('data-name');
+      for (let i = 0; i < voices.length; i++) {
+        if (voices[i].name === selectedOption) {
+          utterThis.voice = voices[i];
+        }
+      }
+      synth.speak(utterThis);
+      utterThis.onend = () => {
+        resolve();
+      };
+    });
+
+  }
+
+  async function utterLines(qn, id = 0) {
+    if (qn !== queNum) {
+      return;
+    }
+
+    const line = linesQue[id];
+    if (line) {
+      let lineSpan;
+      if (id > 0) {
+        lineSpan = document.querySelector(`#file_txt_${id - 1}`);
+        lineSpan.className = '';
+      }
+      lineSpan = document.querySelector(`#file_txt_${id}`);
+      lineSpan.className = 'big-bold';
+      lineSpan.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'center' });
+
+      await utter(line);
+      utterLines(qn, id + 1);
+    }
+  }
+
+  sayButton.onclick = function (e) {
+    utter(inputTxt.value);
+  };
+
+  buttonSayFromFile.onclick = function () {
+    linesQue = [];
+    synth.cancel();
+    textFromFile.innerHTML = '';
+
+    fetch('http://localhost:3000')
+      .then(res => res.text())
+      .then(txt => {
+        linesToSpeak = txt.split(/[\n\r.]/g).filter(line => !!line);
+        textFromFile.innerHTML =
+          linesToSpeak.map((line, id) => `<span id="file_txt_${id}">${line}</span>`).join('');
+        linesQue = linesToSpeak;
+        utterLines(++queNum);
+      });
+  };
+
+  buttonStopFromFile.onclick = function () {
+    linesQue = [];
+    synth.cancel();
+  };
+
+  randomForm.addEventListener('change', () => {
+    isRandomVoice = randomForm['random'].value === "true";
+  });
+
+
+</script>
+</body>
+</html>

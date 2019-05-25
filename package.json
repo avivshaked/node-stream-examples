@@ -1,0 +1,25 @@
+{
+  "name": "node-streams-examples",
+  "version": "1.0.0",
+  "dependencies": {
+    "express": "^4.17.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "scripts": {
+    "1": "node --max-old-space-size=128 ./lsn-1-bartFile-sync",
+    "2": "node --max-old-space-size=128 ./lsn-2-bartFile-write-stream",
+    "3": "node --max-old-space-size=128 ./lsn-3-bartFile-write-stream-managed",
+    "4": "node --max-old-space-size=128 ./lsn-4-bartFile-pipe-read-to-write",
+    "5": "node --max-old-space-size=256 ./lsn-5-romeo-juliet-transform",
+    "bart-write-sync": "node ./lsn-1-bartFile-sync",
+    "bart-write-stream": "node ./lsn-2-bartFile-write-stream",
+    "bart-write-stream-managed": "node ./lsn-3-bartFile-write-stream-managed",
+    "bart-pipe-read-to-write": "node ./lsn-4-bartFile-pipe-read-to-write",
+    "bart-read-write-server": "node --max-old-space-size=256 ./lsn-4-bartFile-pipe-read-to-write/with-server.js",
+    "4-server": "node --max-old-space-size=128 ./lsn-4-bartFile-pipe-read-to-write/with-server.js",
+    "romeo-juliet": "node --max-old-space-size=128 ./lsn-5-romeo-juliet-transform"
+  },
+  "main": "index.js",
+  "license": "MIT"
+}

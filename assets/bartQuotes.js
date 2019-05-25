@@ -1,0 +1,20 @@
+module.exports = [
+  'Eat My Shorts!',
+  'Don\'t Have a Cow, Man!',
+  '¡Ay, caramba!',
+  'Get Bent.',
+  'I\'m Bart Simpson, Who the Hell are You?',
+  'I Didn\'t Do It!, Nobody saw me do it. You can\'t prove anything!',
+  'Aw, Man!',
+  'Aw, Geez!',
+  'Whoa, mama!',
+  'Eep!',
+  'Ow! Quit it.',
+  'Well, if you\'re damned if you do, damned if you don\'t.',
+  'Ask if there\'s a reward.',
+  'Hey, cool, I\'m dead.',
+  'Krusty is coming! Krusty is coming!',
+  'I smell bacon, let\'s see if he\'s wearing a wire.',
+  'I didn\'t think it was physically possible, but this both sucks and blows.',
+  'I can’t promise I’ll try, but I’ll try to try.'
+];
