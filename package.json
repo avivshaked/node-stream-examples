@@ -7,7 +7,7 @@
     "react-dom": "^16.8.6"
   },
   "scripts": {
-    "bartenetor": "node ./bartenetor/server.js",
+    "bartenetor": "cd bartenetor && node server.js",
     "1": "node --max-old-space-size=128 ./lsn-1-bartFile-sync",
     "2": "node --max-old-space-size=128 ./lsn-2-bartFile-write-stream",
     "3": "node --max-old-space-size=128 ./lsn-3-bartFile-write-stream-managed",
