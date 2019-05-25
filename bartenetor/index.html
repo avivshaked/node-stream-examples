@@ -149,7 +149,7 @@
                 </div>
                 <div class="row">
                     <label id="text-to-speak-label">Say: </label>
-                    <textarea id="text-to-speak"></textarea>
+                    <input id="text-to-speak" />
                 </div>
                 <div class="row">
                     <label></label>
@@ -250,6 +250,10 @@
       utterLines(qn, id + 1);
     }
   }
+
+  inputTxt.addEventListener('change', () => {
+    utter(inputTxt.value);
+  });
 
   sayButton.onclick = function (e) {
     utter(inputTxt.value);
