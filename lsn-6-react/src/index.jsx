@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-export const Index = () => {
+const Index = () => {
   return <div>Hello React!</div>;
 };
 

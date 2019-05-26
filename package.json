@@ -2,24 +2,26 @@
   "name": "node-streams-examples",
   "version": "1.0.0",
   "dependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6",
     "express": "^4.17.0",
+    "html-webpack-plugin": "^3.2.0",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "webpack": "^4.32.2",
+    "webpack-cli": "^3.3.2",
+    "webpack-node-externals": "^1.7.2"
   },
   "scripts": {
-    "bartenetor": "cd bartenetor && node server.js",
     "1": "node --max-old-space-size=128 ./lsn-1-bartFile-sync",
     "2": "node --max-old-space-size=128 ./lsn-2-bartFile-write-stream",
     "3": "node --max-old-space-size=128 ./lsn-3-bartFile-write-stream-managed",
     "4": "node --max-old-space-size=128 ./lsn-4-bartFile-pipe-read-to-write",
     "5": "node --max-old-space-size=256 ./lsn-5-romeo-juliet-transform",
-    "bart-write-sync": "node ./lsn-1-bartFile-sync",
-    "bart-write-stream": "node ./lsn-2-bartFile-write-stream",
-    "bart-write-stream-managed": "node ./lsn-3-bartFile-write-stream-managed",
-    "bart-pipe-read-to-write": "node ./lsn-4-bartFile-pipe-read-to-write",
-    "bart-read-write-server": "node --max-old-space-size=256 ./lsn-4-bartFile-pipe-read-to-write/with-server.js",
-    "4-server": "node --max-old-space-size=128 ./lsn-4-bartFile-pipe-read-to-write/with-server.js",
-    "romeo-juliet": "node --max-old-space-size=128 ./lsn-5-romeo-juliet-transform"
+    "bartenetor": "cd bartenetor && node server.js",
+    "6:dev": "webpack --mode development --config ./lsn-6-ssr/webpack.config.js"
   },
   "main": "index.js",
   "license": "MIT"
