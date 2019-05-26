@@ -20,6 +20,7 @@
     "2": "node --max-old-space-size=128 ./lsn-2-bartFile-write-stream",
     "3": "node --max-old-space-size=128 ./lsn-3-bartFile-write-stream-managed",
     "4": "node --max-old-space-size=128 ./lsn-4-bartFile-pipe-read-to-write",
+    "4:serve": "node --max-old-space-size=128 ./lsn-4-bartFile-pipe-read-to-write/with-server.js",
     "5": "node --max-old-space-size=256 ./lsn-5-romeo-juliet-transform",
     "bartenetor": "cd bartenetor && node server.js",
     "6:dev": "webpack --mode development --config ./lsn-6-ssr/webpack.config.js",
