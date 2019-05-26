@@ -23,7 +23,7 @@
     "5": "node --max-old-space-size=256 ./lsn-5-romeo-juliet-transform",
     "bartenetor": "cd bartenetor && node server.js",
     "6:dev": "webpack --mode development --config ./lsn-6-ssr/webpack.config.js",
-    "6:build": "webpack --mode production --config ./lsn-6-ssr/webpack.config.js"
+    "6": "webpack --mode development --config ./lsn-6-ssr/webpack.config.js && node ./lsn-6-ssr/dist/server.js"
   },
   "main": "index.js",
   "license": "MIT"

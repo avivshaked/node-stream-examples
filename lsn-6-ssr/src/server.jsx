@@ -40,7 +40,7 @@ const getPage = (Component, props = {}) => {
           props: ${JSON.stringify(props)}
         };
     </script>
-    <script src="index.js"></script>
+    <script src="/index.js"></script>
     </body>
     </html>
   `;
@@ -49,8 +49,7 @@ const getPage = (Component, props = {}) => {
 const pipeResponseWithStream = (res, next, Component, props = {}) => {
 
   /** We write to the stream the initial payload with res.write**/
-  res.write(`
-      <!DOCTYPE html>
+  res.write(`<!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -94,7 +93,7 @@ const pipeResponseWithStream = (res, next, Component, props = {}) => {
           props: ${JSON.stringify(props)}
         };
     </script>
-    <script src="index.js"></script>
+    <script src="/index.js"></script>
     </body>
     </html>
     `);
