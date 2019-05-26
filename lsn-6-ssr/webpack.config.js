@@ -32,7 +32,6 @@ const webConfig = {...mainConfig,
     path: path.resolve(__dirname, 'dist'),
     filename: 'index.js'
   },
-  plugins: [htmlPlugin],
   target: 'web',
 };
 

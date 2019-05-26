@@ -1,8 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import App from "../components/App.jsx";
 
-export const Index = () => {
-  return <div>Hello React!</div>;
-};
+const props = window.__DATA__.props;
 
-ReactDOM.render(<Index />, document.getElementById("index"));
+ReactDOM.hydrate(<App {...props} />, document.getElementById("index"));

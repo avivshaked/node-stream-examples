@@ -6,6 +6,7 @@
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.6",
+    "compression": "^1.7.4",
     "express": "^4.17.0",
     "html-webpack-plugin": "^3.2.0",
     "react": "^16.8.6",
@@ -21,7 +22,8 @@
     "4": "node --max-old-space-size=128 ./lsn-4-bartFile-pipe-read-to-write",
     "5": "node --max-old-space-size=256 ./lsn-5-romeo-juliet-transform",
     "bartenetor": "cd bartenetor && node server.js",
-    "6:dev": "webpack --mode development --config ./lsn-6-ssr/webpack.config.js"
+    "6:dev": "webpack --mode development --config ./lsn-6-ssr/webpack.config.js",
+    "6:build": "webpack --mode production --config ./lsn-6-ssr/webpack.config.js"
   },
   "main": "index.js",
   "license": "MIT"

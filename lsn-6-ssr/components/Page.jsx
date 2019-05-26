@@ -1,28 +1,14 @@
-import NavBar from './NavBar';
+import React from 'react';
 
 const Page = ({children}) => (
-  <>
-    <style jsx>{`
-      .page {
-        width: 100vw;
-        height: auto;
-        display: block;
-        margin: 0 auto;
-        
-      }
-      .
-    `}</style>
-      <style global jsx>{`
-          body {
-            margin: 0;
-            padding: 0;
-          }   
-      `}</style>
-    <div className="page">
-        <NavBar/>
+    <div className="page" style={{
+        width: '100vw',
+        height: 'auto',
+        display: 'block',
+        margin: '0 auto',
+    }}>
       {children}
     </div>
-    </>
 );
 
 export default Page;

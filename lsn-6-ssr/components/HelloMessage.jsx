@@ -1,24 +1,20 @@
-const HelloMessage = () => (
-  <>
-    <style jsx>{`
-      .container {
-        width: 600px;
-        height: 100px;
-        border: 1px solid black;
-        margin: 0 auto;
-        background-color: #F0F0F0;
-        display: flex;
-        flex-flow: column nowrap;
-        justify-content: center;
-        align-items: center;
-        margin-top: 30px;
-        
-      }
-      `}</style>
-    <div className="container">
-      <h1>React with streams</h1>
-    </div>
-  </>
+import React from 'react';
+
+const HelloMessage = ({ title }) => (
+  <div className="container" style={{
+    width: '600px',
+    height: '100px',
+    border: '1px solid black',
+    margin: '0 auto',
+    backgroundColor: '#F0F0F0',
+    display: 'flex',
+    flexFlow: 'column nowrap',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: '30px',
+  }}>
+    <h1>{title}</h1>
+  </div>
 );
 
 export default HelloMessage;

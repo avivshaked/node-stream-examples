@@ -1,57 +1,51 @@
-import Link from 'next/link';
+import React from "react";
+
+const Link = ({ href, text }) => (
+  <a href={href} style={{
+    color: 'inherit',
+    textDecoration: 'none',
+  }}>{text}</a>
+);
+
+const Li = ({ children }) => (
+  <li style={{
+    textAlign: 'center',
+    alignItems: 'center',
+    padding: '15px 40px',
+    fontSize: '18px',
+    color: 'white',
+    borderLeft: '1px solid #033b81',
+    borderRight: '1px solid #015cb9',
+    cursor: 'pointer',
+  }}>
+    {children}
+  </li>
+);
+
 
 const NavBar = () => (
   <div>
-    <style jsx>{`
-    nav {
-      border-bottom: 1px solid black;
-      background-color: #004b80;
-    }
-    
-    ol {
-        margin: 0;
-        list-style-type: none;
-        display: flex;
-        flex-flow: row nowrap;
-        justify-content: start;
-        align-items: center;
-        
-    }
-    
-    li {
-        text-align: center;
-        align-items: center;
-        padding: 15px 40px;
-        font-size: 18px;
-        color: white;
-        border-left: 1px solid #033b81;
-        border-right: 1px solid #015cb9;
-        cursor: pointer;
-    }
-    
-    li:hover {
-        background-color: #2550b2;
-    }
-    
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    `}</style>
-    <nav>
-      <ol>
-        <li>
-          <Link href="/">
-            <a>No Stream</a>
-          </Link>
-        </li>
-        <li>
-          <Link href="/with-streams">
-            <a>With Streams</a>
-          </Link>
-        </li>
-
+    <nav style={{
+      borderBottom: '1px solid black',
+      backgroundColor: '#004b80'
+    }}>
+      <ol style={{
+        margin: '0',
+        listStyleType: 'none',
+        display: 'flex',
+        flexFlow: 'row nowrap',
+        justifyContent: 'start',
+        alignItems: 'center',
+      }}>
+        <Li>
+          <Link href="/" text="No streams" />
+        </Li>
+        <Li>
+          <Link href="/stream" text="With streams" />
+        </Li>
+        <Li>
+          <Link href="/stream-delay/0" text="Streams with delay" />
+        </Li>
       </ol>
     </nav>
   </div>
